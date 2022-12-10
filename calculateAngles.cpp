@@ -6,11 +6,36 @@
 // angle triangle given the side lengths
 
 
-#include <iomanip>
+
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 
-// function calculates the angle theta given the hypotenuse and the opposite
+bool playAgain() {
+    // variables
+    std::string yesNo;
+
+    while (true) {
+        // asks user if they want to rerun the program
+        std::cout << "Would you like to rerun the program? (y/n) ";
+        std::cin >> yesNo;
+        std::cout << std::endl;
+
+        // user wants to rerun the program
+        if (yesNo == "y" || yesNo == "Y") {
+            return true;
+
+        // user doesn't want to rerun the program
+        } else if (yesNo == "n" || yesNo == "N") {
+            return false;
+        }
+        // user input is invalid
+        std::cout << "Please make sure your input is y or n!" << std::endl;
+    }
+}
+
+// function calculates the angle theta
+// given the hypotenuse and the opposite
 float calcAngle(float opposite, float hypotenuse) {
     // variables
     float hypOverOpp, angleTheta;
@@ -61,6 +86,11 @@ int main() {
             leg1Fl = isValid(leg1Str);
         // input is invalid
         } else {
+            // if user wants to rerun the program
+            if (playAgain()) {
+                continue;
+            }
+            // user doesn't want to rerun the program
             break;
         }
 
@@ -72,6 +102,11 @@ int main() {
             leg2Fl = isValid(leg2Str);
         // input is invalid
         } else {
+            // if user wants to rerun the porgram
+            if (playAgain()) {
+                continue;
+            }
+            // user doesn't want to rerun the program
             break;
         }
 
@@ -81,8 +116,26 @@ int main() {
         // input is valid
         if (isValid(hypotenuseStr) != 0) {
             hypotenuseFl = isValid(hypotenuseStr);
+            // the user imputed a hypotenuse longer than the legs
+            if (hypotenuseFl < leg1Fl || hypotenuseFl < leg2Fl) {
+                std::cout << "Please make sure the hypotenuse"
+                << "is the longest side!" << std::endl;
+
+                // if user wants to rerun the program
+                if (playAgain()) {
+                    continue;
+                }
+                // user doesn't want to rerun the program
+                break;
+            }
+
             // input is invalid
         } else {
+            // if user wants to rerun the program
+            if (playAgain()) {
+                continue;
+            }
+            // user doesn't want to rerun the program
             break;
         }
 
@@ -100,6 +153,11 @@ int main() {
                   << leg1Str << " units, is " << theta2 << "°."
                   << std::endl;
         std::cout << std::endl;
+        // if user wants to rerun the program
+        if (playAgain()) {
+            continue;
+        }
+        // user doesn't want to rerun the program
         break;
     }
 }
